@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #fbcd88;
+}
+
+h2 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffdfaf;
+}
+
+table th,
+table td {
+    border: 1px solid #050000;
+    padding: 8px;
+}
+
+table th {
+    background: #000000;
+    color: #fff;
+}
+
+.btn,
+.btn-edit,
+.btn-delete {
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn {
+    background: #000001;
+    color: #fff;
+}
+
+.btn-edit {
+    background: #0cac4c;
+    color: #fff;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: #fff;
+}
+form table {
+    margin: 0 auto;
+}
