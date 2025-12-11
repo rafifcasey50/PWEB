@@ -13,20 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($nama_pelanggan === "") {
         $errors = "Nama pelanggan wajib diisi.";
     } else {
-        // Ambil harga dari tabel layanan (fungsi ini ada di db.php)
         $harga = getHargaLayanan($koneksi);
 
-        // Hitung total harga
         $total_harga = ($helm_qty * $harga['helm']) +
             ($pakaian_kg * $harga['pakaian']) +
             ($sepatu_pasang * $harga['sepatu']);
 
-        // Siapkan query insert
         $stmt = $koneksi->prepare("INSERT INTO pesanan 
             (nama_pelanggan, helm_qty, pakaian_kg, sepatu_pasang, total_harga, status)
             VALUES (?,?,?,?,?,?)");
 
-        // tipe data: s = string, i = int, d = double
         $stmt->bind_param(
             "sidids",
             $nama_pelanggan,
