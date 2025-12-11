@@ -174,8 +174,8 @@ PWEB/
 2. **Alifsyah Rahman** - 50423127
 3. **Muhammad Rofah Binauf** - 51423013
 
-Mata Kuliah: Pemrograman Web  
-Universitas: [Nama Universitas Anda]  
+Mata Praktikum: Pemrograman Web  
+Universitas: Universitas Gunadarma  
 Tahun: 2024
 
 **Repository:** https://github.com/rafifcasey50/PWEB
