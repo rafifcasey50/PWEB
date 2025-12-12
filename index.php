@@ -1,9 +1,9 @@
 <?php
-// index.php - menampilkan tabel `pesanan`
-require 'auth.php';   // pastikan auth.php ada agar proteksi login bekerja
-require 'db.php';     // db.php kamu menyediakan $koneksi
 
-// ambil semua data dari tabel pesanan
+require 'auth.php';   
+require 'db.php';     
+
+
 $sql = "SELECT id, nama_pelanggan, helm_qty, pakaian_kg, sepatu_pasang, total_harga, status, tanggal FROM pesanan ORDER BY tanggal DESC";
 $result = $koneksi->query($sql);
 ?>
@@ -69,7 +69,7 @@ $result = $koneksi->query($sql);
 
 </html>
 <?php
-// tutup koneksi
+
 if ($result) {
     $result->free();
 }
