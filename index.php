@@ -1,23 +1,29 @@
 <?php
-require 'db.php';
+// index.php - menampilkan tabel `pesanan`
+require 'auth.php';   // pastikan auth.php ada agar proteksi login bekerja
+require 'db.php';     // db.php kamu menyediakan $koneksi
 
-$sql = "SELECT * FROM pesanan ORDER BY tanggal DESC";
+// ambil semua data dari tabel pesanan
+$sql = "SELECT id, nama_pelanggan, helm_qty, pakaian_kg, sepatu_pasang, total_harga, status, tanggal FROM pesanan ORDER BY tanggal DESC";
 $result = $koneksi->query($sql);
 ?>
 <!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Data Pesanan Laundry</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h2>Data Pesanan Laundry</h2>
 
+<head>
+    <meta charset="utf-8">
+    <title>Data Pesanan Laundry</title>
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+
+<body>
+
+    <h2>Data Pesanan Laundry</h2>
     <a href="create.php" class="btn">+ Tambah Pesanan</a>
+    <a href="logout.php" class="btn btn-delete">Logout</a>
     <br><br>
 
-    <table border="1" cellpadding="8" cellspacing="0">
+    <table>
         <thead>
             <tr>
                 <th>ID</th>
@@ -32,32 +38,40 @@ $result = $koneksi->query($sql);
             </tr>
         </thead>
         <tbody>
-        <?php if ($result && $result->num_rows > 0): ?>
-            <?php while ($row = $result->fetch_assoc()): ?>
+            <?php if ($result && $result->num_rows > 0): ?>
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo (int) $row['id']; ?></td>
+                        <td><?php echo htmlspecialchars($row['nama_pelanggan']); ?></td>
+                        <td><?php echo (int) $row['helm_qty']; ?></td>
+                        <td><?php echo htmlspecialchars($row['pakaian_kg']); ?></td>
+                        <td><?php echo (int) $row['sepatu_pasang']; ?></td>
+                        <td>Rp <?php echo number_format($row['total_harga'], 0, ',', '.'); ?></td>
+                        <td><?php echo htmlspecialchars($row['status']); ?></td>
+                        <td><?php echo htmlspecialchars($row['tanggal']); ?></td>
+                        <td>
+                            <a href="read.php?id=<?php echo (int) $row['id']; ?>" class="btn">Detail</a>
+                            <a href="edit.php?id=<?php echo (int) $row['id']; ?>" class="btn-edit">Edit</a>
+                            <a href="delete.php?id=<?php echo (int) $row['id']; ?>" class="btn-delete"
+                                onclick="return confirm('Yakin hapus pesanan ini?')">Hapus</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            <?php else: ?>
                 <tr>
-                    <td><?= $row['id']; ?></td>
-                    <td><?= htmlspecialchars($row['nama_pelanggan']); ?></td>
-                    <td><?= $row['helm_qty']; ?></td>
-                    <td><?= $row['pakaian_kg']; ?></td>
-                    <td><?= $row['sepatu_pasang']; ?></td>
-                    <td>Rp <?= number_format($row['total_harga'], 0, ',', '.'); ?></td>
-                    <td><?= $row['status']; ?></td>
-                    <td><?= $row['tanggal']; ?></td>
-                    <td>
-                        <a href="read.php?id=<?= $row['id']; ?>" class="btn">Detail</a>
-                        <a href="edit.php?id=<?= $row['id']; ?>" class="btn-edit">Edit</a>
-                        <a href="delete.php?id=<?= $row['id']; ?>" 
-                           class="btn-delete"
-                           onclick="return confirm('Yakin hapus pesanan ini?');">
-                           Hapus
-                        </a>
-                    </td>
+                    <td colspan="9" style="text-align:center;">Belum ada data pesanan.</td>
                 </tr>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <tr><td colspan="9">Belum ada data pesanan.</td></tr>
-        <?php endif; ?>
+            <?php endif; ?>
         </tbody>
     </table>
+
 </body>
+
 </html>
+<?php
+// tutup koneksi
+if ($result) {
+    $result->free();
+}
+$koneksi->close();
+?>
