@@ -14,6 +14,15 @@ CREATE TABLE IF NOT EXISTS pembayaran (
     FOREIGN KEY (pesanan_id) REFERENCES pesanan(id)
 );
 
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  role ENUM('admin','user') DEFAULT 'admin',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 
 INSERT INTO layanan (jenis, harga, satuan) VALUES
 ('Cuci Helm', 15000, 'unit'),
