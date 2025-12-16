@@ -51,7 +51,7 @@ $result = $koneksi->query($sql);
                         <td><?php echo htmlspecialchars($row['tanggal']); ?></td>
                         <td>
                             <a href="read.php?id=<?php echo (int) $row['id']; ?>" class="btn">Detail</a>
-                            <a href="edit.php?id=<?php echo (int) $row['id']; ?>" class="btn-edit">Edit</a>
+                            <a href="update.php?id=<?php echo (int) $row['id']; ?>" class="btn-edit">Update</a>
                             <a href="delete.php?id=<?php echo (int) $row['id']; ?>" class="btn-delete"
                                 onclick="return confirm('Yakin hapus pesanan ini?')">Hapus</a>
                         </td>
