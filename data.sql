@@ -1,17 +1,19 @@
+CREATE TABLE IF NOT EXISTS pesanan (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama_pelanggan VARCHAR(100) NOT NULL,
+    helm_qty INT DEFAULT 0,
+    pakaian_kg DECIMAL(5,2) DEFAULT 0,
+    sepatu_pasang INT DEFAULT 0,
+    total_harga DECIMAL(10,2) NOT NULL,
+    status ENUM('pending','proses','selesai') DEFAULT 'pending',
+    tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS layanan (
     id INT AUTO_INCREMENT PRIMARY KEY,
     jenis VARCHAR(50) NOT NULL,
     harga DECIMAL(10,2) NOT NULL,
     satuan VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS pembayaran (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    pesanan_id INT NOT NULL,
-    jumlah_bayar DECIMAL(10,2) NOT NULL,
-    metode ENUM('cash','transfer','ewallet') DEFAULT 'cash',
-    tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (pesanan_id) REFERENCES pesanan(id)
 );
 
 CREATE TABLE IF NOT EXISTS users (
