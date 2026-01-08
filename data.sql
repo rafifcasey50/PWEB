@@ -25,6 +25,12 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 
+INSERT INTO users (username, password, role)
+VALUES (
+  'admin',
+  '$2y$10$wH6P2G7kM0fZkY5sV9Hq2eKZy6K0c1E9nY7Qz9o4J0yJxXQ0vJp2K',
+  'admin'
+);
 
 INSERT INTO layanan (jenis, harga, satuan) VALUES
 ('Cuci Helm', 15000, 'unit'),
